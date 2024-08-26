@@ -20,7 +20,8 @@ namespace StockManagement.DAL
                 .Include(p => p.Category)
                 .Include(p => p.Size)
                 .Where(p => p.Id == id)
-                .Select(p => ConvertDomain.ProductToDomain(p)).FirstOrDefault();
+                .Select(p => ConvertDomain.ProductToDomain(p))
+                .AsNoTracking().FirstOrDefault();
         }
 
         public List<ProductDTO> GetAll()
@@ -39,6 +40,22 @@ namespace StockManagement.DAL
             Context.TbProducts.Add(newProduct);
             Context.SaveChanges();
             return newProduct.Id;
+        }
+
+        public int Update(ProductDTO product)
+        {
+            var updateProduct = ConvertDomain.ProductToPersistence(product);
+            updateProduct.UpdatedAt = DateTime.Now;
+            Context.TbProducts.Update(updateProduct);
+            Context.SaveChanges();
+            return updateProduct.Id;
+        }
+
+        public void Delete(int id)
+        {
+            var product = Context.TbProducts.Where(p => p.Id == id).FirstOrDefault();
+            Context.TbProducts.Remove(product);
+            Context.SaveChanges();
         }
     }
 }

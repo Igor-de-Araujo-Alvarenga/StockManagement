@@ -26,5 +26,17 @@ namespace StockManagement.API.Controllers
         {
             return StockApplication.Post(product);
         }
+
+        [HttpPut(Name = "Put")]
+        public DefaultDTO<int> Put(ProductDTO product)
+        {
+            return StockApplication.Update(product);
+        }
+
+        [HttpDelete(Name = "Delete/{id}")]
+        public DefaultDTO<int> Delete(int id)
+        {
+            return StockApplication.Delete(id);
+        }
     }
 }

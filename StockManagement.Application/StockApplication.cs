@@ -40,5 +40,34 @@ namespace StockManagement.Application
                 return new DefaultDTO<int>(0, ex.Message);
             }
         }
+
+        public DefaultDTO<int> Update(ProductDTO input)
+        {
+            try
+            {
+                if (ProductDAL.Get(input.Id) == null)
+                    throw new Exception($"Not found product: {input.Id}");
+                ProductDAL.Update(input);
+                return new DefaultDTO<int>(input.Id);
+            }catch(Exception ex)
+            {
+                return new DefaultDTO<int>(0, ex.Message);
+            }
+        }
+
+        public DefaultDTO<int> Delete(int id)
+        {
+            try
+            {
+                if (ProductDAL.Get(id) == null)
+                    throw new Exception($"Not found product: {id}");
+                ProductDAL.Delete(id);
+                return new DefaultDTO<int>(id);
+            }
+            catch (Exception ex)
+            {
+                return new DefaultDTO<int>(0, ex.Message);
+            }
+        }
     }
 }

@@ -11,5 +11,7 @@ namespace StockManagement.Application.Interfaces
     {
         DefaultDTO<List<ProductDTO>> Get(int id);
         DefaultDTO<int> Post(ProductDTO product);
+        DefaultDTO<int> Update(ProductDTO input);
+        DefaultDTO<int> Delete(int id);
     }
 }

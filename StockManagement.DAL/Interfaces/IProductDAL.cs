@@ -12,5 +12,7 @@ namespace StockManagement.DAL.Interfaces
         List<ProductDTO> GetAll();
         ProductDTO Get(int id);
         int Post(ProductDTO product);
+        int Update(ProductDTO product);
+        void Delete(int id);
     }
 }
